@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+{% endblock slider %}
+
+{% block main %}
+
+<div class="d-flex justify-content-between" style="margin-top: 150px;">
+
+    <div class="col-6">
+        <h2 class="text-danger fw-bold fs-1">CinemaGo</h2>
+        <p class="text-light fw-bold">Добро пожаловть в наш кинотеатр. Покупайе подписку, что бы смотеть фильмы без рекламы
+        и получать уведомления о новинках</p>
+    </div>
+
+    <div class="col-4">
+    <div class="card bg-dark border-light p-4">
+        <h4 class="text-light text-center">{{ title }}</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-dark border-light w-100">Войти</button>
+        </form>
+        <hr class="text-light">
+        <a href="{% url 'registration' %}" class="btn btn-success w-100">Зарегистрироваться</a>
+    </div>
+    </div>
+</div>
+
+{% endblock main %}
+
+
+

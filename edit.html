@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+{% endblock slider %}
+
+{% block main %}
+
+<div class="d-flex justify-content-between">
+
+    <div class="col-5">
+        <div class="card p-3">
+        <h5 class="text-center">Изменения Аккаунта</h5>
+        <form action="{% url 'edit_account' %}" method="post" class="change_ac">
+            {% csrf_token %}
+            {{ account_form.as_p }}
+
+            <button class="btn btn-dark" type="submit">Изменить Аккаунт</button>
+        </form>
+            </div>
+    </div>
+
+    <div class="col-5">
+        <div class="card p-3">
+        <h5 class="text-center">Изменения Профиля</h5>
+        <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ profile_form.as_p }}
+
+            <button class="btn btn-dark" type="submit">Изменить Проиль</button>
+        </form>
+            </div>
+    </div>
+
+</div>
+
+{% endblock main %}

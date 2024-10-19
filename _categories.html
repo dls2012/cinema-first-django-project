@@ -1,0 +1,10 @@
+{% load cinema_go_tags %}
+{% get_categories as categories %}
+
+<div class="d-flex flex-column p-3  text-center">
+    <a href="{% url 'main' %}" class="text-light mt-3 btn border-light btn-outline-danger">Все</a>
+    {% for category in categories %}
+    <a href="{{ category.get_absolute_url }}" class="text-light mt-3 btn border-light btn-outline-danger">{{ category.title }}</a>
+    {% endfor %}
+</div>
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block main %}
+<div class="d-flex justify-content-between">
+
+    <div class="col-3">
+        {% include 'cinema_go\components\_categories.html' %}
+    </div>
+
+    <div class="col-8">
+        {% for cinema in cinemas %}
+        {% include 'cinema_go\components\_card.html' %}
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock main %}

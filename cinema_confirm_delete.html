@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+{% endblock slider %}
+
+{% block main %}
+
+<div class="d-flex justify-content-center">
+    <form action="" method="post">
+        {% csrf_token %}
+        <p class="text-light fs-4">
+            Вы действительно решили удалить {{ cinema.title }}?
+        </p>
+        <button type="submit" class="btn btn-danger border-light w-100">Да удалить</button>
+           <hr>
+    <a href="{{ cinema.get_absolute_url }}" class="btn btn-primary border-light w-100">Нет передумал</a>
+    </form>
+
+</div>
+
+{% endblock main %}

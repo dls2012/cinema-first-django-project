@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+{% endblock slider %}
+
+{% block main %}
+
+<div class="d-flex justify-content-between" style="margin-top: 150px;">
+
+    <div class="col-4">
+        <h2 class="text-danger fw-bold fs-1">Добвить новое Кино на CinemaGo</h2>
+        <p class="text-light fw-bold">Придобавлении нового Кинофильма будьте придельно внимаьтельны и не забудьте
+        заполнять поля правильно</p>
+    </div>
+
+    <div class="col-6">
+    <div class="card bg-dark border-light p-4">
+        <h4 class="text-light text-center">{{ title }}</h4>
+        <form action="" method="post" class="text-light" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-dark border-light w-100">
+                {% if 'update' in request.path %}
+                Сохранить изменения
+                {% else %}
+                Добавить
+                {% endif %}
+            </button>
+        </form>
+        <hr class="text-light">
+        <a href="{{ cinema.get_absolute_url }}" class="btn btn-success w-100">Вернуться на главную</a>
+    </div>
+    </div>
+</div>
+
+{% endblock main %}
+
+
+
+
+

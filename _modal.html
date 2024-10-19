@@ -1,0 +1,24 @@
+<!-- Кнопка-триггер модального окна -->
+<button type="button" class="btn btn-dark border-light rounded mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Смотреть трейлер
+</button>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-light">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ cinema.title }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body bg-dark">
+        <video controls="controls" muted width="100%"  autoplay>
+                    <!--   Здесь будет видео      -->
+
+                    <source src="{{ cinema.trailer.url }}">
+        </video>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+{% endblock slider %}
+
+{% block main %}
+
+<div class="d-flex justify-content-between" style="margin-top: 150px;">
+
+    <div class="col-6">
+        <h2 class="text-danger fw-bold fs-1">CinemaGo</h2>
+        <p class="text-light fw-bold">Добро пожаловть в наш кинотеатр. Покупайе подписку, что бы смотеть фильмы без рекламы
+        и получать уведомления о новинках</p>
+    </div>
+
+    <div class="col-4">
+    <div class="card bg-dark border-light p-4">
+        <h4 class="text-light text-center">{{ title }}</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <div class="form-floating flex-fill mb-4">
+                {{ form.username }}
+                <label for="{{ form.username.id_for_label }}" class="form-label">Ваш логин</label>
+            </div>
+
+            <div class="form-floating flex-fill mb-4">
+                {{ form.first_name }}
+                <label for="{{ form.first_name.id_for_label }}" class="form-label">Ваше имя</label>
+            </div>
+
+            <div class="form-floating flex-fill mb-4">
+                {{ form.last_name }}
+                <label for="{{ form.last_name.id_for_label }}" class="form-label">Ваше фамилия</label>
+            </div>
+
+            <div class="form-floating flex-fill mb-4">
+                {{ form.email }}
+                <label for="{{ form.email.id_for_label }}" class="form-label">Ваша почта</label>
+            </div>
+
+            <div class="form-floating flex-fill mb-4">
+                {{ form.password1 }}
+                <label for="{{ form.password1.id_for_label }}" class="form-label">Ваша пароль</label>
+            </div>
+
+            <div class="form-floating flex-fill mb-4">
+                {{ form.password2 }}
+                <label for="{{ form.password2.id_for_label }}" class="form-label">Подтвердите пароль</label>
+            </div>
+
+
+            <button type="submit" class="btn btn-dark border-light w-100">Зарегистрироваться</button>
+        </form>
+        <hr class="text-light">
+        <a href="" class="btn btn-success w-100">Войти</a>
+    </div>
+    </div>
+</div>
+
+{% endblock main %}
+
+
+
+
+
+
+

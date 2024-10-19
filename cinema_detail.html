@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+{% endblock slider %}
+
+{% block main %}
+
+<div class="d-flex justify-content-between">
+
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+                <h4>{{ cinema.title }}</h4>
+            </div>
+
+            <div class="card-body bg-dark text-light">
+
+                                <video muted width="100%" height="500px" controls="controls"
+                                       poster="{{ cinema.get_photo }}" preload="metadata" >
+                                    {% if cinema.video %}
+                                    <!--   Здесь будет видео      -->
+                                    <source src="{{ cinema.video.url }}" type="video/mp4" >
+                                    {% endif %}
+                                </video>
+
+                <div class="d-flex justify-content-between">
+                    <div>
+                        {% if cinema.trailer %}
+                        {% include 'cinema_go\components\_modal.html' %}
+                        {% endif %}
+                    </div>
+                    <div class="delete_update mt-4">
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'update' cinema.pk %}" class="btn btn-dark border-light mx-2">Изменить</a>
+                        <a href="{% url 'delete' cinema.pk %}" class="btn btn-dark border-light">Удалить</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <h5 class="mt-3">Описание</h5>
+                <p>{{ cinema.content }}</p>
+
+            </div>
+
+        </div>
+
+        <div class="comment bg-dark p-3 mt-3 rounded text-light">
+            {% if request.user.is_authenticated %}
+            <form action="
+            {% if 'update_comment' not in request.path %}
+            {% url 'save_comment' cinema.pk %}
+            {% endif %}
+            " method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-dark border-light" type="submit">
+                    {% if 'update_comment' not in request.path %}
+                    Отправить
+                    {% else %}
+                    Изменить
+                    {% endif %}
+                </button>
+            </form>
+            {% else %}
+            <h4 class="text-light fs-5">
+                <a href="{% url 'login' %}" class="fs-5 fw-bold">Авторизуйтесь</a>
+                что бы оставить комментарий
+            </h4>
+            {% endif %}
+        </div>
+
+        <div class="cinema-comments mt-2">
+            {% for comment in comments %}
+            <div class="card bg-dark rounded mt-3 p-3">
+                <div class="d-flex justify-content-between">
+                    <div class="comment_info text-light">
+                        <a href="" class="fs-5">{{ comment.user.username }}</a>
+                        <p class="text-light" style="font-size: 15px;">Дата:
+                            {{ comment.updated_at }}
+                        </p>
+                        <p class="mt-3">{{ comment.text }}</p>
+                    </div>
+
+                    <div class="comment_action">
+                        {% if request.user == comment.user %}
+                        <a href="{% url 'comment_delete' cinema.pk comment.pk %}" class="text-light mx-3"><i
+                                class="bi bi-trash"></i></a>
+                        <a href="{% url 'update_comment' comment.pk %}" class="text-light">
+                            <i class="bi bi-pencil-square"></i></a>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!-- Здесь сделаем рекомендации   -->
+    <div class="col-3">
+        {% for c in cinemas %}
+        {% if c != cinema %}
+        <a href="{{ c.get_absolute_url }}">
+            <div class="card border-light bg-dark mt-3">
+                <div class="card-body">
+                    <img src="{{ c.get_photo }}" alt="" class="w-100 rounded" height="250px">
+                </div>
+                <p class="text-light text-center fs-5">{{ c.title }}</p>
+            </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+
+    </div>
+
+
+</div>
+
+
+{% endblock main %}
+
